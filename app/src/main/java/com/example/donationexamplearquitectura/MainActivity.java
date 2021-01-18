@@ -8,34 +8,37 @@ import android.widget.Toast;
 
 import com.example.donationexamplearquitectura.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IViewPresenter{
     private ActivityMainBinding mBanding;
-    private Controller controller;
-
+    private DonationPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBanding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(mBanding.getRoot());
-        controller = new Controller();
+        presenter= new DonationPresenter(this);
         mBanding.button.setOnClickListener(v -> makeDonation() );
     }
     private void makeDonation(){
-
-        boolean donation = controller.saveDonation(mBanding.etDonation.getText().toString());
-        if (donation){
-            int totalDonation = controller.totalDonation();
-            String total = getString(R.string.total_donation, String.valueOf(totalDonation));
-            mBanding.tvTotal.setText((total));
-            mBanding.etDonation.setText("");
-        }else{
-            showMessage("Donación no realizada");
-        }
+        presenter.saveDonation(mBanding.etDonation.getText().toString());
+        mBanding.etDonation.setText("");
     }
 
-    private void showMessage (String message){
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    @Override
+    public void updateTotalDonation(int totalAmount) {
+        String total = getString(R.string.total_donation, String.valueOf(totalAmount));
+        mBanding.tvTotal.setText((total));
+    }
 
+    @Override
+    public void displayConfirmationMessage() {
+        Toast.makeText(this, "Donación realizada", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void displayErrorMessage() {
+        Toast.makeText(this, "Algo ocurrio, error en la donación ",
+                Toast.LENGTH_SHORT).show();
     }
 }
