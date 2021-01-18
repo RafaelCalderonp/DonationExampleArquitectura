@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">DonationExampleArquitectura</string>
+    <string name="total_donation">Total de Donaciones : %1$s</string>
+    <string name="inputDonatiom">Ingrese una nueva donación</string>
+    <string name="ingresa_tu_donaci_n">Ingresa tu donación</string>
+    <string name="hacer_donacion">Hacer Donacion</string>
+</resources>
