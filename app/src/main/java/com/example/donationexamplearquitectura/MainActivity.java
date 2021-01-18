@@ -3,6 +3,7 @@ package com.example.donationexamplearquitectura;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements IViewPresenter{
     private void makeDonation(){
         presenter.saveDonation(mBanding.etDonation.getText().toString());
         mBanding.etDonation.setText("");
+        presenter.checkTotal();
     }
 
     @Override
@@ -41,4 +43,11 @@ public class MainActivity extends AppCompatActivity implements IViewPresenter{
         Toast.makeText(this, "Algo ocurrio, error en la donación ",
                 Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void displayColorAlert(String colour) {
+        mBanding.textView.setBackgroundColor(Color.parseColor(colour));
+    }
+
+
 }

@@ -18,4 +18,8 @@ public class DonationPresenter {
             view.displayErrorMessage();
         }
     }
+    public void checkTotal() {
+        view.displayColorAlert(model.checkAmountDonation());
+    }
+
 }

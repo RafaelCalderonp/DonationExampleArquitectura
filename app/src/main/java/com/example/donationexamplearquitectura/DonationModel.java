@@ -28,6 +28,18 @@ public class DonationModel {
             return -1;
         }
     }
+    public String checkAmountDonation(){
+        if(donationAmount < 200){
+            return "#D61212";
+        }else{
+            if (donationAmount >= 200 && donationAmount < 500){
+            return "#56E30A";
+        }else {
+                return "#FF3700B3";
+            }
+
+        }
+    }
     public int getDonationAmount() {
         return donationAmount;
     }
